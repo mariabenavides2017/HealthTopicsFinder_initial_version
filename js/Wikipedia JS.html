@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://okfnlabs.org/wikipediajs/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <title>Wikipedia JS</title>
+   
+  <link href="./Wikipedia JS_files/css" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="./Wikipedia JS_files/bootstrap-combined.min.css">
+  <style type="text/css">
+    textarea {
+      height: 300px;
+      width: 90%;
+    }
+    
+    .content {
+      margin-top: 20px;
+    }
+
+    img.thumbnail {
+      float: right;
+    }
+
+    .clear {
+      clear: both;
+    }
+  </style>
+</head>
+<body>
+  <div class="navbar navbar-static-top">
+    <div class="navbar-inner">
+      <div class="container">
+        <a class="brand" href="http://okfnlabs.org/wikipediajs/#">WikipediaJS - a Javascript library for Wikipedia Data</a>
+        <ul class="nav pull-right">
+          <li>
+            <a>
+            <iframe src="./Wikipedia JS_files/github-btn.html" allowtransparency="true" frameborder="0" scrolling="0" width="80" height="20"></iframe>
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/okfn/wikipediajs/issues">Report Issues</a>
+          </li>
+          <li>
+            <a href="https://twitter.com/rufuspollock">@rufuspollock</a>
+          </li>
+          <li>
+            <a class="nav-logo pull-left" href="http://okfnlabs.org/" title="An Open Knowledge Foundation Labs Project">
+              <img src="./Wikipedia JS_files/logo_28x30.png" alt="Open Knowledge Foundation logo" style="margin-top: -5px; margin-right: 0;">
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="content container">
+    <div class="page-header">
+      <h1>
+        Wikipedia.JS
+        <small>is a small Javascript library for accessing information in Wikipedia articles such as dates, places, abstracts and more ...</small>
+      </h1>
+    </div>
+    <h2>The Library</h2>
+    <div class="row">
+      <div class="span6">
+        <h3>Get the code</h3>
+        <p>You can grab the (incredibly lightweight) <a href="./Wikipedia JS_files/wikipedia.js">wikipedia.js library from here</a>.
+        </p><p>Want to <a href="http://okfnlabs.org/wikipediajs/docs/wikipedia.html">browse the annotated source</a>?</p>
+        <p>The library is the work of <a href="http://okfnlabs.org/">Open Knowledge Foundation Labs</a> and <a href="http://rufuspollock.org/">Rufus Pollock</a> in particular. It is, in essence, a small wrapper around the data and <a href="http://dbpedia.org/sparql/">APIs</a> of the <a href="http://dbpedia.org/">DBPedia project</a> and it is they who have done all the heavy lifting of extracting structured data from Wikipedia - huge credit and thanks to DBPedia folks!</p>
+      </div>
+      <div class="span6">
+        <h3>Using it</h3>
+        <pre><code>// first include the script
+&lt;script src='http://okfnlabs.org/wikipediajs/wikipedia.js'&gt;&lt;/script&gt;
+var info = WIKIPEDIA.getData('http://en.wikipedia.org/wiki/Invasion_of_Normandy');
+alert(info.summary.title);
+console.log(info);</code></pre>
+        <p><em>Or, check out the more detailed demo below ...</em></p>
+      </div>
+    </div>
+
+    <h2 id="demo">A Demo</h2>
+    <form action="http://okfnlabs.org/wikipediajs/" method="GET" class="form-inline">
+      <label>Wikipedia URL</label>
+      <input name="url" type="text" class="url span6" placeholder="Enter a Wikipedia or DBPedia URL" value="http://en.wikipedia.org/wiki/Normandy_landings">
+      <button>Go »</button>
+    </form>
+
+    <p>This simple demo uses <a href="./Wikipedia JS_files/wikipedia.js">wikipedia.js library</a> to load information on the given page and display it below. The <a href="./Wikipedia JS_files/app.js">JS source for the demo is here</a> while the HTML source is just this page!</p>
+
+
+    <div class="loading" style="display: none;">
+      <strong>Loading</strong> <img src="./Wikipedia JS_files/ajaxload-circle.gif">
+    </div>
+
+    <div class="results" style="display: none;">
+      <h3>Results</h3>
+
+      <div class="summary well">
+        <img src="http://okfnlabs.org/wikipediajs/" class="thumbnail">
+        <h4>
+          <span class="title"></span>
+        </h4>
+        <p>
+          Type: <span class="type"></span>
+          <br>
+          Location: <span class="place"></span>
+          <br>
+          Dates: <span class="start"></span> — <span class="end"></span>
+        </p>
+        <p class="summary"></p>
+        <div class="clear"></div>
+
+        <h4>Raw JSON</h4>
+        <textarea class="raw"></textarea>
+      </div>
+
+      <p>
+        <a href="http://okfnlabs.org/wikipediajs/#raw" class="js-data-summary">Show raw RDF information »</a>
+      </p>
+
+      <div id="raw" class="data-summary" style="display: none;">
+        <h3>
+          RDF Summary
+          (<span class="count"></span> properties found)
+        </h3>
+        <pre class="properties"></pre>
+
+        <h4>Raw JSON</h4>
+        <textarea class="results-json"></textarea>
+      </div>
+
+    </div>
+  </div>
+
+  <script type="text/javascript" async="" src="./Wikipedia JS_files/ga.js"></script><script src="./Wikipedia JS_files/jquery.min.js"></script>
+  <script src="./Wikipedia JS_files/wikipedia.js"></script>
+  <script src="./Wikipedia JS_files/app.js"></script>
+<script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-33874954-3']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+</body></html>

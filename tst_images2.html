@@ -1,0 +1,76 @@
+<html>
+  <head>
+   <!-- Bootstrap core CSS -->
+    <link href="css/bootstrap.css" rel="stylesheet">
+
+    <!-- Add custom CSS here -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css">
+	<link href="css/business-casual.css" rel="stylesheet">
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <title>Comperio Super Simple Image Search</title>
+  </head>
+  <body>
+    Search for <b>cats, dogs, cakes</b>, or anything else that takes your fancy :-)
+    <br />
+    <input id="searchterm" />
+    <button id="search">search</button>
+    <div id="results"></div>
+    <script>
+      $("#search").click(function(){
+	    $("#results").empty();
+        $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+        {
+          tags: $("#searchterm").val(), 
+          tagmode: "health",
+		  text: "health",
+          format: "json"
+        },
+        function(data) {
+		  var counter = 1; 
+		
+          $.each(data.items, function(i,item){
+		  
+		//   console.log(item);
+		
+		//     console.log('i:' + i);
+			 
+			
+		  
+		    if (counter <= 3) {
+						
+				
+		//		$("#results").append("<div class='col-sm-4 text-left' ><img class='img-responsive' src='" + item.media.m + "' alt='" +  //      item.tags + "' />" + " </div>");
+				
+				$("#results").append("<div class='col-sm-4 text-left' ><img class='img-responsive' src='" + item.media.m + "' alt='" + item.tags + "' />" + "<h3><small>" + item.tags + "</small></h3>" + "</div>");
+				
+				
+				
+				counter = counter + 1;
+				
+				
+			   } else {
+			 //     $("<div class='clearfix'></div>").prependTo("#results");
+				 $("#results").append("<div class='clearfix'></div>");
+				 counter = 1;
+			   
+			   } 
+			
+			//  counter = counter + 1;
+		
+			 
+            if ( i == 12 ) return false;
+			
+			  console.log('counter: ' + counter);
+          });
+		  
+		 
+		  
+		  $("#results").append("<div class='clearfix'></div>");
+		  
+        });
+      });
+    </script>
+  </body>
+</html>

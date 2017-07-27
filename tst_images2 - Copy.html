@@ -1,0 +1,31 @@
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <title>Comperio Super Simple Image Search</title>
+  </head>
+  <body>
+    Search for <b>cats, dogs, cakes</b>, or anything else that takes your fancy :-)
+    <br />
+    <input id="searchterm" />
+    <button id="search">search</button>
+    <div id="results"></div>
+    <script>
+      $("#search").click(function(){
+	    $("#results").empty();
+        $.getJSON("http://api.flickr.com/services/feeds/photos_public.gne?jsoncallback=?",
+        {
+          tags: $("#searchterm").val(), 
+          tagmode: "health",
+		  text: "health",
+          format: "json"
+        },
+        function(data) {
+          $.each(data.items, function(i,item){
+            $("<img/>").attr("src", item.media.m).prependTo("#results");
+            if ( i == 10 ) return false;
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
